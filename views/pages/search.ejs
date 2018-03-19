@@ -1,0 +1,91 @@
+<% include ../partials/head %>
+<% var data = JSON.parse(venues); %>
+<% console.log(data.venues[0].contact.formattedPhone); %>
+<div class="map-results-wrapper">
+   <div id="info-panel-container">
+      <img src="/public/assets/locations.svg">
+      <% for(let i = 0; i < data.venues.length; i++) {%>
+      <div class="info-panel">
+         <h5> <%= data.venues[i].name %> </h5>
+         <a href="<%= data.venues[i].url%>" target="_blank"><%= data.venues[i].url %></a>
+         <p><%= data.venues[i].location.address %></p>
+         <p><%= data.venues[i].location.city%>, <%= data.venues[i].location.state %> <%= data.venues[i].location.postalCode %></p>
+         <% if(data.venues[i].contact.phone) {%>
+         <p><a href="tel:<%= data.venues[i].contact.phone%>"><%= data.venues[i].contact.formattedPhone %></a></p>
+         <% } else { %>
+         <% } %>
+      </div>
+      <% } %>
+   </div>
+   <div id="map"></div>
+</div>
+<script>
+   const locationArray = () => {
+   
+      let locationData = JSON.parse(<%- JSON.stringify(venues) %>);
+   
+      let venues = locationData.venues;
+   
+      let arr = [];
+   
+      for (let i = 0; i < venues.length; i++) {
+   
+         let venueCoords = {};
+   
+         venueCoords.lat = venues[i].location.lat;
+         venueCoords.lng = venues[i].location.lng;
+   
+         arr.push(venueCoords);
+      }
+   
+     return arr;
+   }
+   
+   const coordinateArray = locationArray();
+   
+   console.log(coordinateArray);
+   
+   function initMap() {
+   
+     let marker = [];
+     let infowindow = [];
+     let map;
+   
+     let cords = coordinateArray;
+   
+     let info = [{
+           description: 'This is restaraunt #1'
+        },
+        {
+           description: 'This is restaraunt #2'
+        },
+        {
+           description: 'This is restaraunt #3'
+        }
+     ];
+   
+     map = new
+     google.maps.Map(document.getElementById('map'), {
+        center: cords[0],
+        zoom: 10
+     });
+   
+     for (let i = 0; i < cords.length; i++) {
+        marker.push(new google.maps.Marker({
+           position: cords[i],
+           map: map,
+        }));
+   
+        infowindow.push(new google.maps.InfoWindow({
+           content: info[i].description
+        }));
+   
+        marker[i].addListener('click', () => {
+           infowindow[i].open(map, marker[i]);
+        });
+     }
+   }
+   
+   
+</script>
+<% include ../partials/footer %>

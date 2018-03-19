@@ -1,0 +1,48 @@
+<% include ../partials/head %>
+
+<div class="head-logo">
+         <img src="/public/assets/wanna-eat-logo.svg">
+      </div>
+      <form method="post" action="/">
+      <div class="form-container">
+         <div>
+            <input class="zipcode" type="text" name="zipcode" placeholder="ENTER YOUR ZIPCODE HERE">
+         </div>
+         <div class="radio-btn-heading">
+         		<h5>- SELECT A FOOD CATEGORY -</h5>
+         </div>
+         <div class="radio-btns">
+            <div class="option">
+               <input type="radio" value="bbq" id="" name="options">
+               <label for="bbq">BBQ</label>
+            </div>
+            <div class="option">
+               <input type="radio" value="sushi" id="" name="options">
+               <label for="sushi">SUSHI</label>
+            </div>
+            <div class="option">
+               <input type="radio" value="burgers" id="" name="options">
+               <label for="burgers">BURGERS</label>
+            </div>
+            <div class="option">
+               <input type="radio" value="cafe" id="" name="options">
+               <label for="cafe">Cafe</label>
+            </div>
+            <div class="option">
+               <input type="radio" value="pizza" id="" name="options">
+               <label for="pizza">PIZZA/PASTA</label>
+            </div>
+            <div class="option">
+               <input type="radio" value="wings" id="" name="options">
+               <label for="wings">WINGS</label>
+            </div>
+            <div class="option">
+               <input type="radio" value="tacos" id="" name="options">
+               <label for="tacos">TACOS</label>
+            </div>
+         </div>
+         <button type="submit">ENTER</button>
+      </div>
+  	</form>
+
+ <% include ../partials/footer %>
